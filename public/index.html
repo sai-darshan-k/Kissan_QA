@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KISSAN 4.0 - Upgrade Your Farming Today!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('https://images.unsplash.com/photo-1500595046743-cd271d6942f3?auto=format&fit=crop&q=80') no-repeat center/cover fixed;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            background: linear-gradient(135deg, #2e7d32, #66bb6a);
+            padding: 40px;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+        header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.5em;
+            color: #fff;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+            margin: 0;
+        }
+        .header-subtitle {
+            color: #fff;
+            font-size: 1.2em;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 10px;
+            background: #7cb342;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+            margin: 20px auto;
+            max-width: 80%;
+        }
+        .intro {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 6px solid #7cb342;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: slideIn 0.8s ease;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .form-group {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .form-group:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: 600;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: block;
+        }
+        input[type="text"], input[type="tel"], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #7cb342;
+            outline: none;
+            box-shadow: 0 0 5px rgba(124, 179, 66, 0.3);
+        }
+        .radio-group, .checkbox-group {
+            margin: 10px 0;
+        }
+        .radio-option, .checkbox-option {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        .radio-option input, .checkbox-option input {
+            margin-right: 10px;
+            margin-bottom: 12px;
+        }
+        button {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            color: #fff;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: block;
+            margin: 13px auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, background 0.3s;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #1b5e20, #388e3c);
+            transform: translateY(-3px);
+        }
+        .reward-box {
+            background: #fff3e0;
+            border: 2px dashed #fb8c00;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        .reward-box h3 {
+            color: #e65100;
+            margin: 0 0 10px;
+        }
+        .promotional {
+            background: linear-gradient(120deg, #e8f5e9, #c8e6c9); /* Default for first section */
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+        .promotional-content {
+            flex: 1;
+            text-align: left;
+        }
+        .promotional-image {
+            flex: 0 0 auto;
+            max-width: 200px;
+        }
+        .promotional h3 {
+            color: #2e7d32;
+            font-family: 'Merriweather', serif;
+            margin: 0 0 10px;
+        }
+        .promotional p {
+            margin: 10px 0;
+        }
+        .promotional ul {
+            text-align: left;
+            display: inline-block;
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        .free-question {
+            margin: 10px 0;
+        }
+        .share-section {
+            background: linear-gradient(120deg, #ffebee, #ffcdd2);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .share-section h3 {
+            color: #c62828;
+            font-family: 'Merriweather', serif;
+        }
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .share-buttons button {
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .loading-spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #7cb342;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .whatsapp-share-btn {
+            background: #25D366;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .whatsapp-share-btn:hover {
+            opacity: 0.9;
+        }
+        .whatsapp { background: #25D366; }
+        .facebook { background: #1877F2; }
+        .twitter { background: #1DA1F2; }
+        .share-buttons button:hover { opacity: 0.9; }
+        .thank-you-page {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        .thank-you-page h2 {
+            color: #2e7d32;
+            font-size: 2em;
+            font-family: 'Merriweather', serif;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        .required:after {
+            content: " *";
+            color: red;
+        }
+    
+        /* Mobile Responsiveness (below 768px) */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 15px;
+                margin: 0 10px;
+                max-width: 100%;
+            }
+            header {
+                padding: 20px;
+            }
+            header h1 {
+                font-size: 1.8em;
+            }
+            .header-subtitle {
+                font-size: 1em;
+            }
+            .progress-bar {
+                max-width: 90%;
+            }
+            .intro {
+                padding: 15px;
+            }
+            .intro p {
+                font-size: 0.9em;
+            }
+            .form-group {
+                padding: 15px;
+            }
+            label {
+                font-size: 1em;
+            }
+            input[type="text"], input[type="tel"], select, textarea {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+            .radio-option, .checkbox-option {
+                margin: 5px 0;
+                display: flex;
+                align-items: center;
+                flex-wrap: nowrap;
+            }
+            .radio-option input, .checkbox-option input {
+                margin-right: 8px;
+                margin-bottom: 12px;
+            }
+            .radio-option label, .checkbox-option label {
+                font-size: 0.9em;
+                line-height: 1.2;
+            }
+            button {
+                padding: 12px 30px;
+                font-size: 1em;
+            }
+            .reward-box {
+                padding: 15px;
+            }
+            .reward-box h3 {
+                font-size: 1.2em;
+            }
+            .promotional {
+                padding: 15px;
+                flex-direction: column; /* Stack vertically on mobile */
+                align-items: center; /* Center items */
+                gap: 15px;
+            }
+            .promotional-content {
+                text-align: center; /* Center text for better mobile layout */
+                width: 100%; /* Full width */
+                display: flex;
+                flex-direction: column; /* Stack content vertically */
+            }
+            .promotional-image {
+                max-width: 150px; /* Smaller image on mobile */
+                order: 1; /* Place image after free-question but before radio-group */
+            }
+            .free-question {
+                order: 0; /* Keep below main content but above image */
+                font-size: 1em;
+            }
+            .radio-group {
+                order: 2; /* Place radio options below image */
+                flex-direction: column; /* Stack radio options vertically on mobile */
+                gap: 10px;
+                width: 100%; /* Full width for centering */
+            }
+            .promotional h3 {
+                font-size: 1.4em;
+            }
+            .promotional p {
+                font-size: 0.9em;
+            }
+            .promotional ul {
+                padding-left: 0; /* Remove left padding for centered list */
+                font-size: 0.9em;
+            }
+            .share-section {
+                padding: 15px;
+            }
+            .share-section h3 {
+                font-size: 1.4em;
+            }
+            .share-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .share-buttons button {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+            .thank-you-page {
+                padding: 20px;
+            }
+            .thank-you-page h2 {
+                font-size: 1.5em;
+            }
+        }
+        /* Share Buttons for Mega Powered Kissan */
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+@media (max-width: 768px) {
+    .share-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two buttons side-by-side */
+        grid-template-rows: auto auto; /* Two rows: first for two buttons, second for one */
+        gap: 10px;
+        justify-items: center;
+    }
+
+    .share-buttons button:nth-child(3) {
+        grid-column: 1 / 3; /* Span across both columns */
+        width: 50%; /* Control width of the third button */
+    }
+}
+
+/* Promotional Section Radio Buttons */
+.promotional .radio-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; /* Allow wrapping if needed */
+}
+
+@media (max-width: 768px) {
+    .promotional .radio-group {
+        flex-direction: column; /* Stack vertically on mobile */
+        align-items: center; /* Center align radio options */
+        gap: 10px;
+    }
+
+    .promotional .radio-option {
+        width: 100%; /* Full width for better spacing */
+        justify-content: center; /* Center the content */
+    }
+
+    .promotional .radio-option label {
+        font-size: 0.9em;
+    }
+}
+#realTimeDisplay {
+    font-weight: bold;
+    color: #fff;
+    font-size: 1.1em;
+}
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Main Form Container -->
+    <div id="mainForm" class="container">
+        <header>
+            <h1>KISSAN 4.0: Your Farming Revolution Starts Here with AI!</h1>
+            <p class="header-subtitle">Join thousands of farmers unlocking smarter, richer harvests!</p>
+            <p>Current Time: <span id="realTimeDisplay"></span></p>
+        </header>
+
+        <div class="progress-bar" id="progressBar"></div>
+
+        <div class="intro">
+            <p><strong>You work hard to feed the nation.</strong> Now, let KISSAN 4.0 work hard for YOU!</p>
+            <p>Take 5 minutes to answer a few questions and unlock FREE tools, expert advice, and cash rewards.</p>
+            <p><em>Limited Offer: First 500 farmers get a FREE soil testing kit!</em></p>
+        </div>
+
+        <form id="farmerSurvey" onsubmit="submitForm(event)">
+            <!-- Initial Questions -->
+            <div class="form-group">
+                <label for="feeling" class="required">How are you today, farmer?</label>
+                <select id="feeling" name="feeling" required>
+                    <option value="">Tell us how you feel</option>
+                    <option value="Great">Great – Ready to grow!</option>
+                    <option value="Good">Good – Steady as always</option>
+                    <option value="Okay">Okay – Could use some help</option>
+                    <option value="Not good">Not good – Facing challenges</option>
+                    <option value="Struggling">Struggling – Need solutions now</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="required">Are you a farmer?</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="isFarmerYes" name="isFarmer" value="Yes" required>
+                        <label for="isFarmerYes">Yes, I’m a proud farmer!</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="isFarmerNo" name="isFarmer" value="No">
+                        <label for="isFarmerNo">No, but I’m part of the farming world</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="required">Is your farming currently profitable?</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="profitableYes" name="profitable" value="Profitable" required>
+                        <label for="profitableYes">Yes, it’s profitable</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="profitableBreakeven" name="profitable" value="Breakeven">
+                        <label for="profitableBreakeven">Breaking even</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="profitableNo" name="profitable" value="Loss">
+                        <label for="profitableNo">Currently facing losses</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="required">Do you use any technology for farming?</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="techYes" name="useTech" value="Yes" required>
+                        <label for="techYes">Yes</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="techNo" name="useTech" value="No">
+                        <label for="techNo">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Basic Information -->
+            <div class="form-group">
+                <label for="name" class="required"><i class="fas fa-user"></i> Your Name</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your name">
+            </div>
+
+            <div class="form-group">
+                <label for="phone" class="required"><i class="fas fa-phone"></i> Mobile Number</label>
+                <input type="tel" id="phone" name="phone" required placeholder="Enter your number">
+            </div>
+
+            <div class="form-group">
+                <label for="state" class="required">State</label>
+                <select id="state" name="state" required onchange="checkWhatsAppEligibility()">
+                    <option value="">Select your state</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="West Bengal">West Bengal</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="district" class="required">District</label>
+                <input type="text" id="district" name="district" required placeholder="Enter your district">
+            </div>
+
+            <div class="form-group">
+                <label for="village" class="required">Village</label>
+                <input type="text" id="village" name="village" required placeholder="Enter your village">
+            </div>
+
+            <!-- Farming Profile -->
+            <div class="form-group">
+                <label for="landSize">How much land do you cultivate (in acres)?</label>
+                <input type="text" id="landSize" name="landSize" placeholder="e.g., 5 acres">
+            </div>
+
+            <div class="form-group">
+                <label for="cropTypes">What are the main crops you grow?</label>
+                <input type="text" id="cropTypes" name="cropTypes" placeholder="e.g., Rice, Wheat, Vegetables">
+            </div>
+
+            <div class="promotional">
+                <div class="promotional-content">
+                    <h3>KISSAN 4.0: Your Complete Farming Solution</h3>
+                    <p>We bring you tools to grow smarter and earn more:</p>
+                    <ul style="text-align: left; display: inline-block;">
+                        <li><strong>Soil Management:</strong> Free testing & tips</li>
+                        <li><strong>Disease Control:</strong> Spot issues early</li>
+                        <li><strong>Market Prices:</strong> Real-time mandi updates</li>
+                        <li><strong>Government Help:</strong> Easy scheme access</li>
+                        <li><strong>AI Support:</strong> 24/7 in your language</li>
+                    </ul>
+                    <p class="free-question"><strong>Want these services FREE?</strong></p>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="freeServiceYes" name="freeService" value="Yes">
+                            <label for="freeServiceYes">Yes, sign me up!</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="freeServiceNo" name="freeService" value="No">
+                            <label for="freeServiceNo">Not now</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="promotional-image">
+                    <img src="/static/img4.jpg" alt="KISSAN 4.0 Farming Solution" style="max-width: 100%; height: auto; border-radius: 10px;">
+                </div>
+            </div>
+            <!-- Challenges -->
+            <div class="form-group">
+                <label>What are your biggest farming challenges?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="challengePests" name="challenges" value="Pest Management">
+                        <label for="challengePests">Pests and diseases</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="challengeSoil" name="challenges" value="Soil Health">
+                        <label for="challengeSoil">Soil health</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="challengeWater" name="challenges" value="Water Management">
+                        <label for="challengeWater">Water issues</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="challengeWeather" name="challenges" value="Weather Uncertainty">
+                        <label for="challengeWeather">Unpredictable weather</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="challengeMarket" name="challenges" value="Market Access">
+                        <label for="challengeMarket">Market prices & access</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="challengeInfo" name="challenges" value="Information Access">
+                        <label for="challengeInfo">Lack of info</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soil Testing -->
+            <div class="form-group">
+                <label>Have you tested your soil for nutrients?</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="soilTestYes" name="soilTest" value="Yes">
+                        <label for="soilTestYes">Yes</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="soilTestNo" name="soilTest" value="No">
+                        <label for="soilTestNo">No</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="soilTestNotSure" name="soilTest" value="Not Sure">
+                        <label for="soilTestNotSure">Not sure</label>
+                    </div>
+                </div>
+            </div>
+
+<!-- AI Product Promotion -->
+<div class="promotional" style="background: linear-gradient(120deg, #e3f2fd, #bbdefb);">
+    <div class="promotional-content">
+        <h3>KISSAN 4.0 Smart Farming System</h3>
+        <p>Revolutionize your farm with:</p>
+        <ul style="text-align: left; display: inline-block;">
+            <li>Real-time soil & weather monitoring</li>
+            <li>Auto-irrigation from your phone</li>
+            <li>Rain alerts & AI security cameras</li>
+            <li>Protect your land 24/7</li>
+        </ul>
+        <p class="free-question"><strong>Get it FREE or at a discount?</strong></p>
+        <div class="radio-group">
+            <div class="radio-option">
+                <input type="radio" id="aiSystemYes" name="aiSystem" value="Yes">
+                <label for="aiSystemYes">Yes, I want it!</label>
+            </div>
+            <div class="radio-option">
+                <input type="radio" id="aiSystemMaybe" name="aiSystem" value="Maybe">
+                <label for="aiSystemMaybe">Maybe, tell me more</label>
+            </div>
+            <div class="radio-option">
+                <input type="radio" id="aiSystemNo" name="aiSystem" value="No">
+                <label for="aiSystemNo">Not now</label>
+            </div>
+        </div>
+    </div>
+    <div class="promotional-image">
+        <img src="/static/soil.webp" alt="KISSAN 4.0 System" style="max-width: 100%; height: auto; border-radius: 10px;">
+    </div>
+</div>
+            <!-- Market Intelligence -->
+            <div class="form-group">
+                <label>How do you get market price info?</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="priceMiddlemen" name="priceInfo" value="Local Middlemen">
+                        <label for="priceMiddlemen">Local traders</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="priceMarket" name="priceInfo" value="Visit Market">
+                        <label for="priceMarket">Market visits</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="pricePhone" name="priceInfo" value="Phone">
+                        <label for="pricePhone">Phone calls</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="priceApp" name="priceInfo" value="Mobile App">
+                        <label for="priceApp">Apps/SMS</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="priceTV" name="priceInfo" value="TV/Radio">
+                        <label for="priceTV">TV/Radio</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Government Schemes -->
+            <div class="form-group">
+                <label>Are you using government schemes?</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="govSchemeYes" name="govScheme" value="Yes">
+                        <label for="govSchemeYes">Yes</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="govSchemeNo" name="govScheme" value="No">
+                        <label for="govSchemeNo">No</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="govSchemeNotSure" name="govScheme" value="Not Sure">
+                        <label for="govSchemeNotSure">Not sure</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direct Sales -->
+            <div class="form-group">
+                <label>Interested in selling directly to Consumer/Dealer?</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="directSaleYes" name="directSale" value="Yes">
+                        <label for="directSaleYes">Yes, very interested</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="directSaleMaybe" name="directSale" value="Maybe">
+                        <label for="directSaleMaybe">Maybe, need more info</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="directSaleNo" name="directSale" value="No">
+                        <label for="directSaleNo">No, I’m fine now</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Communication Preference -->
+            <div class="form-group">
+                <label class="required">How do you want farming info?</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="comSMS" name="comPreference" value="SMS" required>
+                        <label for="comSMS">SMS</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="comVoice" name="comPreference" value="Voice Call">
+                        <label for="comVoice">Voice call</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="comWhatsApp" name="comPreference" value="WhatsApp">
+                        <label for="comWhatsApp">WhatsApp</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="comApp" name="comPreference" value="Mobile App">
+                        <label for="comApp">Mobile app</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="language" class="required">Preferred language</label>
+                <select id="language" name="language" required>
+                    <option value="">Select a language</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="English">English</option>
+                    <option value="Bengali">Bengali</option>
+                    <option value="Marathi">Marathi</option>
+                    <option value="Telugu">Telugu</option>
+                    <option value="Tamil">Tamil</option>
+                    <option value="Gujarati">Gujarati</option>
+                    <option value="Kannada">Kannada</option>
+                    <option value="Malayalam">Malayalam</option>
+                    <option value="Punjabi">Punjabi</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <!-- WhatsApp Group Option -->
+            <div id="whatsappGroupOption" class="form-group" style="display: none; background: #e1f5fe;">
+                <label style="color: #01579b;">Join our WhatsApp Community!</label>
+                <p>Get instant updates & connect with farmers in your state.</p>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="joinWhatsAppYes" name="joinWhatsApp" value="Yes" checked>
+                        <label for="joinWhatsAppYes">Yes, add me!</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="joinWhatsAppNo" name="joinWhatsApp" value="No">
+                        <label for="joinWhatsAppNo">No, maybe later</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reward Box -->
+            <div class="reward-box">
+                <h3>Unlock Your Reward!</h3>
+                <p>Submit now and get <strong>Barosa upto ₹10</strong> + a chance to win FREE KISSAN 4.0 tools!</p>
+            </div>
+<!-- Add hidden input for submission time -->
+<input type="hidden" id="submissionTime" name="submissionTime">
+<!-- Share Section -->
+<div class="share-section">
+    <h3>Become a Mega Powered Kissan!</h3>
+    <p><strong>Share & Win:</strong> Invite 5 friends and get KISSAN 4.0 for FREE (worth upto ₹5000)!</p>
+    <div class="share-buttons">
+        <button type="button" class="whatsapp" onclick="shareForm('whatsapp')">WhatsApp</button>
+        <button type="button" class="facebook" onclick="shareForm('facebook')">Facebook</button>
+        <button type="button" class="twitter" onclick="shareForm('twitter')">Instagram</button>
+    </div>
+</div>
+
+            <!-- Comments -->
+            <div class="form-group">
+                <label for="comments">Any questions or thoughts?</label>
+                <textarea id="comments" name="comments" rows="4" placeholder="Tell us more..."></textarea>
+            </div>
+
+            <button type="submit">Submit Now!</button>
+        </form>
+
+        <footer>
+            <p>Trusted by farmers across India | 100% Confidential | © 2025 KISSAN 4.0</p>
+        </footer>
+    </div>
+
+    <div id="thankYouPage" class="container thank-you-page">
+        <header>
+            <h1>KISSAN 4.0: AN AI FARMING REVOLUTION</h1>
+        </header>
+        <h2 id="thankYouMessage">Thank You, Farmer!</h2>
+        <p>Your info is in! Expect personalized farming tips soon.</p>
+        <div class="reward-box">
+            <h3>Congratulations!</h3>
+            <p>You’ve earned <strong>10% Discount</strong> – coupon will credit soon!</p>
+            <button class="whatsapp-share-btn" onclick="shareForm('whatsapp')">
+                <i class="fab fa-whatsapp"></i> Share on WhatsApp
+            </button>
+        </div>
+        <div id="whatsappJoinSection" style="display: none; margin-top: 30px;">
+            <h3 style="color: #075e54;">Join Your WhatsApp Community</h3>
+            <p>Connect with farmers & experts in your state!</p>
+            <button style="background: #128C7E;" onclick="window.location.href='https://chat.whatsapp.com/FFwb7dnuw2kKbQAkABxbkY'">Join Now</button>
+        </div>
+        <p style="margin-top: 20px; font-weight: bold; color: #e67e22;">Be a Farming Hero – Share the Revolution with Friends!</p>
+        <p style="margin-top: 10px;">Invite others to join KISSAN 4.0 and unlock smarter farming for all – together, we grow stronger!</p>
+        <footer>
+            <p>© 2025 KISSAN 4.0 - Transforming Indian Agriculture</p>
+        </footer>
+    </div>
+    <script>
+        // Check if the form has already been submitted on page load
+        window.onload = function () {
+            const hasSubmitted = localStorage.getItem('formSubmitted');
+            if (hasSubmitted === 'true') {
+                document.getElementById('mainForm').style.display = 'none';
+                document.getElementById('thankYouPage').style.display = 'block';
+                const savedName = localStorage.getItem('farmerName');
+                if (savedName) {
+                    document.getElementById('thankYouMessage').textContent = `Thank You, ${savedName}!`;
+                }
+                checkWhatsAppOnLoad();
+            } else {
+                document.getElementById('mainForm').style.display = 'block';
+                document.getElementById('thankYouPage').style.display = 'none';
+            }
+        };
+    
+        // Progress Bar
+        const form = document.getElementById('farmerSurvey');
+        const progressBar = document.getElementById('progressBar');
+        form.addEventListener('input', () => {
+            const inputs = form.querySelectorAll('input, select, textarea');
+            let filled = 0;
+            inputs.forEach(input => { if (input.value) filled++; });
+            progressBar.style.width = `${(filled / inputs.length) * 100}%`;
+        });
+    
+        function updateRealTime() {
+        const realTimeDisplay = document.getElementById('realTimeDisplay');
+        const now = new Date();
+        const istOptions = {
+            timeZone: 'Asia/Kolkata',
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        };
+        realTimeDisplay.textContent = now.toLocaleString('en-US', istOptions) + ' IST';
+    }
+
+    setInterval(updateRealTime, 1000);
+    updateRealTime();
+
+    // Form Submission with IST display
+    async function submitForm(event) {
+        event.preventDefault();
+
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        loadingOverlay.style.display = 'flex';
+
+        const formData = new FormData(form);
+        const data = {};
+        formData.forEach((value, key) => {
+            if (key === 'challenges' || key === 'priceInfo') {
+                if (!data[key]) data[key] = [];
+                data[key].push(value);
+            } else {
+                data[key] = value;
+            }
+        });
+
+        // Get IST timestamp for Google Sheets (DD-MM-YYYY HH:MM:SS IST)
+        const now = new Date();
+        const istOptionsSheets = {
+            timeZone: 'Asia/Kolkata',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        };
+        const formatterSheets = new Intl.DateTimeFormat('en-IN', istOptionsSheets);
+        const [
+            { value: day },,
+            { value: month },,
+            { value: year },,
+            { value: hour },,
+            { value: minute },,
+            { value: second }
+        ] = formatterSheets.formatToParts(now);
+        const submissionTimeSheets = `${day}-${month}-${year} ${hour}:${minute}:${second} IST`;
+        data.submissionTime = submissionTimeSheets;
+        document.getElementById('submissionTime').value = submissionTimeSheets;
+
+        // Get IST timestamp for display (Friday, March 14, 2025 at 12:59:57 AM)
+        const istOptionsDisplay = {
+            timeZone: 'Asia/Kolkata',
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+        };
+        const submissionTimeDisplay = now.toLocaleString('en-US', istOptionsDisplay);
+
+        // Get farmer's name
+        const farmerName = document.getElementById('name').value;
+
+        // Transition to Thank You page
+        document.getElementById('mainForm').style.display = 'none';
+        const thankYouPage = document.getElementById('thankYouPage');
+        thankYouPage.style.display = 'block';
+        document.getElementById('thankYouMessage').textContent = `Thank You, ${farmerName}!`;
+
+        // Add submission time to Thank You page
+        const submissionTimeElement = document.createElement('p');
+        submissionTimeElement.innerHTML = `Form Submitted: <strong>${submissionTimeDisplay}</strong>`;
+        submissionTimeElement.style.margin = '20px 0';
+        thankYouPage.insertBefore(submissionTimeElement, document.getElementById('whatsappJoinSection'));
+
+        loadingOverlay.style.display = 'none';
+
+        // WhatsApp eligibility
+        const state = document.getElementById('state') ? document.getElementById('state').value : localStorage.getItem('submittedState');
+        if (['Karnataka', 'Andhra Pradesh', 'Tamil Nadu'].includes(state)) {
+            document.getElementById('whatsappJoinSection').style.display = 'block';
+        }
+
+        // LocalStorage
+        localStorage.setItem('formSubmitted', 'true');
+        localStorage.setItem('farmerName', farmerName);
+        localStorage.setItem('submittedState', state);
+
+        // Send to Google Sheets
+        try {
+            await fetch('https://script.google.com/macros/s/AKfycbyUnX92mixXZdDlEs2ur9Diynd2qIgs7cmesj9rhMrYfCohXC3vP6aUaWjhFy-Wf4TE/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+            console.log('Form submitted successfully');
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Network error occurred. Submission recorded locally.');
+        }
+    }
+
+    // Share Functionality (unchanged)
+    function shareForm(platform) {
+        const url = window.location.href;
+        const shareText = "Join KISSAN 4.0 to upgrade your farming! Check it out: ";
+        let shareUrl;
+        switch(platform) {
+            case 'whatsapp':
+                shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText + url)}`;
+                break;
+            case 'facebook':
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                break;
+            case 'twitter':
+                shareUrl = `https://www.instagram.com/`;
+                break;
+        }
+        if (shareUrl) window.open(shareUrl, '_blank');
+    }
+
+    // WhatsApp Eligibility (unchanged)
+    function checkWhatsAppEligibility() {
+        const state = document.getElementById('state').value;
+        const whatsappOption = document.getElementById('whatsappGroupOption');
+        whatsappOption.style.display = ['Karnataka', 'Andhra Pradesh', 'Tamil Nadu'].includes(state) ? 'block' : 'none';
+    }
+
+    function checkWhatsAppOnLoad() {
+        const submittedState = localStorage.getItem('submittedState');
+        if (['Karnataka', 'Andhra Pradesh', 'Tamil Nadu'].includes(submittedState)) {
+            document.getElementById('whatsappJoinSection').style.display = 'block';
+        }
+    }
+
+    function joinWhatsAppGroup() {
+        const phone = document.getElementById('phone')?.value || localStorage.getItem('farmerPhone');
+        if (phone) {
+            alert(`You’ll be added to the WhatsApp group soon! We'll contact you at ${phone}`);
+            localStorage.setItem('farmerPhone', phone);
+        } else {
+            alert('Please provide your phone number to join the WhatsApp group.');
+        }
+    }
+    </script>
+
+ <!-- Google Translate Widget -->
+ <div id="google_translate_element"></div>
+
+ <script type="text/javascript">
+     function googleTranslateElementInit() {
+         new google.translate.TranslateElement({
+             pageLanguage: 'en',
+             includedLanguages: 'en,hi,mr,ta,te,kn,ml,gu,pa,bn,or,as,ur,sa',
+             layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+             autoDisplay: false,
+             gaTrack: true
+         }, 'google_translate_element');
+
+         setTimeout(function() {
+             disableHoverTooltip();
+             setNativeLanguageNames();
+         }, 2000);
+     }
+
+     function disableHoverTooltip() {
+         document.body.addEventListener('mouseover', function(e) {
+             e.stopPropagation();
+         }, true);
+
+         const tooltips = document.querySelectorAll('.goog-tooltip, .goog-te-tooltip');
+         tooltips.forEach(tooltip => {
+             tooltip.style.display = 'none !important';
+         });
+     }
+
+     function setNativeLanguageNames() {
+         const nativeLanguages = {
+             'en': 'English', 'hi': 'हिन्दी', 'mr': 'मराठी', 'ta': 'தமிழ்', 'te': 'తెలుగు',
+             'kn': 'ಕನ್ನಡ', 'ml': 'മലയാളം', 'gu': 'ગુજરાતી', 'pa': 'ਪੰਜਾਬੀ', 'bn': 'বাংলা',
+             'or': 'ଓଡ଼ିଆ', 'as': 'অসমীয়া', 'ur': 'اردو', 'sa': 'संस्कृतम्'
+         };
+
+         let attempts = 0;
+         const maxAttempts = 10;
+         const checkDropdown = setInterval(() => {
+             const menuFrame = document.querySelector('iframe.goog-te-menu-frame');
+             if (menuFrame) {
+                 const menuDoc = menuFrame.contentDocument || menuFrame.contentWindow.document;
+                 const menuItems = menuDoc.querySelectorAll('.goog-te-menu2-item div.text, .goog-te-menu2-item span.text');
+
+                 if (menuItems.length > 0) {
+                     menuItems.forEach(item => {
+                         const parent = item.closest('.goog-te-menu2-item');
+                         if (parent) {
+                             const onclick = parent.getAttribute('onclick') || '';
+                             const langCodeMatch = onclick.match(/'([^']+)'/);
+                             const langCode = langCodeMatch ? langCodeMatch[1] : null;
+
+                             if (langCode && nativeLanguages[langCode]) {
+                                 item.textContent = nativeLanguages[langCode];
+                             }
+                         }
+                     });
+                     clearInterval(checkDropdown);
+                     console.log('Native language names applied successfully');
+                 }
+             }
+
+             attempts++;
+             if (attempts >= maxAttempts) {
+                 clearInterval(checkDropdown);
+                 console.warn('Failed to apply native language names after maximum attempts');
+             }
+         }, 500);
+     }
+
+     window.addEventListener("pageshow", function (event) {
+         if (!document.querySelector(".goog-te-gadget") && event.persisted) {
+             googleTranslateElementInit();
+         }
+     });
+
+     window.addEventListener("load", function () {
+         if (!document.querySelector(".goog-te-gadget")) {
+             googleTranslateElementInit();
+         }
+     });
+ </script>
+
+ <!-- Load Google Translate API -->
+ <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+ <style>
+     /* Positioning the Google Translate Widget at bottom-right */
+     #google_translate_element {
+         position: fixed;
+         bottom: 20px; /* Position from bottom */
+         right: 20px;  /* Position from right */
+         z-index: 1000;
+         background-color: rgba(255, 255, 255, 0.95);
+         padding: 4px; /* Reduced padding for smaller size */
+         border-radius: 6px;
+         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+     }
+
+     /* Styling the Google Translate dropdown - smaller size */
+     .goog-te-gadget-simple {
+         border: 1px solid #388e3c !important;
+         border-radius: 4px !important;
+         padding: 4px 8px !important; /* Smaller padding */
+         font-family: 'Poppins', sans-serif !important;
+         font-size: 12px !important; /* Smaller font size */
+         background-color: #4caf50 !important;
+         color: #fff !important;
+         cursor: pointer !important;
+         transition: all 0.3s ease !important;
+         display: inline-flex !important;
+         align-items: center !important;
+     }
+
+     .goog-te-gadget-simple:hover {
+         background-color: #388e3c !important;
+         border-color: #2e7d32 !important;
+         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+     }
+
+     .goog-te-gadget-simple .goog-te-menu-value {
+         color: #fff !important;
+         text-decoration: none !important;
+         margin: 0 !important;
+     }
+
+     .goog-te-gadget-simple .goog-te-menu-value span {
+         color: #fff !important;
+     }
+
+     /* Hide Google branding and tooltips */
+     .goog-te-gadget img,
+     .goog-te-banner-frame,
+     .skiptranslate > iframe.skiptranslate,
+     .goog-tooltip,
+     .goog-te-tooltip,
+     .goog-te-spinner {
+         display: none !important;
+     }
+
+     /* Style the dropdown menu items - slightly smaller */
+     .goog-te-menu-frame {
+         max-height: 250px !important; /* Reduced height */
+         overflow-y: auto !important;
+         border-radius: 4px !important;
+         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+     }
+
+     .goog-te-menu2-item span.text,
+     .goog-te-menu2-item div.text {
+         font-family: 'Poppins', sans-serif !important;
+         font-size: 12px !important; /* Smaller font */
+         color: #333 !important;
+         padding: 6px 10px !important; /* Slightly smaller padding */
+     }
+
+     .goog-te-menu2-item:hover {
+         background-color: #e8f5e9 !important;
+     }
+
+     /* Prevent layout shift */
+     body {
+         top: 0 !important;
+         position: relative !important;
+         margin: 0 !important;
+     }
+
+     html, body {
+         height: 100%;
+         min-height: 100vh;
+         background-size: cover;
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+         margin: 0;
+         padding: 0;
+     }
+
+     /* Mobile Adjustments */
+     @media (max-width: 768px) {
+         #google_translate_element {
+             bottom: 15px; /* Closer to bottom on mobile */
+             right: 10px;
+             padding: 3px;
+         }
+         .goog-te-gadget-simple {
+             padding: 3px 6px !important;
+             font-size: 11px !important;
+         }
+     }
+
+     @media (max-width: 480px) {
+         #google_translate_element {
+             bottom: 10px;
+             right: 5px;
+         }
+         .goog-te-gadget-simple {
+             padding: 2px 5px !important;
+             font-size: 10px !important;
+         }
+     }
+
+     /* Mobile Landscape */
+     @media (max-width: 768px) and (orientation: landscape) {
+         #google_translate_element {
+             bottom: 10px;
+             right: 10px;
+             padding: 3px;
+         }
+         .goog-te-gadget-simple {
+             padding: 3px 6px !important;
+             font-size: 11px !important;
+         }
+     }
+ </style>
+</body>
+</html>
