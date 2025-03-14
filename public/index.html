@@ -851,7 +851,7 @@
         <p>Your info is in! Expect personalized farming tips soon.</p>
         <div class="reward-box">
             <h3>Congratulations!</h3>
-            <p>You’ve earned upto <strong>10% Discount</strong> – coupon will credit soon!</p>
+            <p>You’ve earned upto <strong>10% Discount</strong> – credited soon!</p>
             <button class="whatsapp-share-btn" onclick="shareForm('whatsapp')">
                 <i class="fab fa-whatsapp"></i> Share on WhatsApp
             </button>
@@ -869,21 +869,21 @@
     </div>
     <script>
         // Check if the form has already been submitted on page load
-        window.onload = function () {
-            const hasSubmitted = localStorage.getItem('formSubmitted');
-            if (hasSubmitted === 'true') {
-                document.getElementById('mainForm').style.display = 'none';
-                document.getElementById('thankYouPage').style.display = 'block';
-                const savedName = localStorage.getItem('farmerName');
-                if (savedName) {
-                    document.getElementById('thankYouMessage').textContent = `Thank You, ${savedName}!`;
-                }
-                checkWhatsAppOnLoad();
-            } else {
-                document.getElementById('mainForm').style.display = 'block';
-                document.getElementById('thankYouPage').style.display = 'none';
-            }
-        };
+        // window.onload = function () {
+        //     const hasSubmitted = localStorage.getItem('formSubmitted');
+        //     if (hasSubmitted === 'true') {
+        //         document.getElementById('mainForm').style.display = 'none';
+        //         document.getElementById('thankYouPage').style.display = 'block';
+        //         const savedName = localStorage.getItem('farmerName');
+        //         if (savedName) {
+        //             document.getElementById('thankYouMessage').textContent = `Thank You, ${savedName}!`;
+        //         }
+        //         checkWhatsAppOnLoad();
+        //     } else {
+        //         document.getElementById('mainForm').style.display = 'block';
+        //         document.getElementById('thankYouPage').style.display = 'none';
+        //     }
+        // };
     
         // Progress Bar
         const form = document.getElementById('farmerSurvey');
