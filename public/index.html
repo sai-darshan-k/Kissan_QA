@@ -1022,21 +1022,30 @@
     function shareForm(platform) {
     const url = "https://kissan-qa.onrender.com/#"; // Use your specific URL
     const farmerName = localStorage.getItem('farmerName') || document.getElementById('name')?.value || "A Farmer"; // Fallback to "A Farmer" if no name
-    const shareText = `${farmerName} shared you and got upto 10% discount, now it's your turn to fill the form and share to get Free Soil test kits: `;
+    
+    // Combine all three languages in one message with clear separation
+    const shareText = `
+English: ${farmerName} shared you and got FREE SOIL TEST KIT and upto 10% discount on AI for Farm, now it's your turn to fill the form and share to get Free Soil test kits: ${url}
+
+Kannada: ${farmerName} ನಿಮಗೆ ಹಂಚಿಕೊಂಡು ಉಚಿತ ಮಣ್ಣಿನ ಪರೀಕ್ಷಾ ಕಿಟ್ ಮತ್ತು AI ಫಾರ್ ಫಾರ್ಮ್‌ನಲ್ಲಿ 10% ರವರೆಗೆ ರಿಯಾಯಿತಿ ಪಡೆದಿದ್ದಾರೆ, ಈಗ ನಿಮ್ಮ ಸರದಿ ಫಾರ್ಮ್ ಭರ್ತಿ ಮಾಡಿ ಮತ್ತು ಹಂಚಿಕೊಂಡು ಉಚಿತ ಮಣ್ಣಿನ ಪರೀಕ್ಷಾ ಕಿಟ್‌ಗಳನ್ನು ಪಡೆಯಿರಿ: ${url}
+
+Telugu: ${farmerName} మీతో పంచుకుని ఉచిత మట్టి పరీక్షా కిట్ మరియు AI ఫార్ ఫార్మ్‌పై 10% వరకు డిస్కౌంట్ పొందారు, ఇప్పుడు మీ వంతు ఫారమ్ నింపి పంచుకోవడం ద్వారా ఉచిత మట్టి పరీక్షా కిట్‌లను పొందండి: ${url}
+    `;
+
     let shareUrl;
     switch(platform) {
         case 'whatsapp':
-            shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText + url)}`;
+            shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
             break;
         case 'facebook':
             shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(shareText)}`;
             break;
         case 'twitter':
-            shareUrl = `https://www.instagram.com/`; // Note: Instagram doesn't support direct text sharing via URL; consider updating this
+            shareUrl = `https://www.instagram.in/t?text=${encodeURIComponent(shareText)}`;
             break;
     }
     if (shareUrl) window.open(shareUrl, '_blank');
-}
+        }
 
     // WhatsApp Eligibility (unchanged)
     function checkWhatsAppEligibility() {
