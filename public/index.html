@@ -961,76 +961,6 @@
             { value: month },,
             { value: year },,
             { value: hour },,
-   
-<script>
-    // Check if the form has already been submitted on page load
-    //window.onload = function () {
-        //const hasSubmitted = localStorage.getItem('formSubmitted');
-        //if (hasSubmitted === 'true') {
-            //document.getElementById('mainForm').style.display = 'none';
-            //document.getElementById('thankYouPage').style.display = 'block';
-            //const savedName = localStorage.getItem('farmerName');
-            //if (savedName) {
-                //document.getElementById('thankYouMessage').textContent = `Thank You, ${savedName}!`;
-            //}
-            //checkWhatsAppOnLoad();
-        //} else {
-            //document.getElementById('mainForm').style.display = 'block';
-            //document.getElementById('thankYouPage').style.display = 'none';
-        //}
-        // Set language based on URL parameter
-        //setLanguageFromUrl();
-    //};
-
-    // Progress Bar
-    const form = document.getElementById('farmerSurvey');
-    const progressBar = document.getElementById('progressBar');
-    form.addEventListener('input', () => {
-        const inputs = form.querySelectorAll('input, select, textarea');
-        let filled = 0;
-        inputs.forEach(input => { if (input.value) filled++; });
-        progressBar.style.width = `${(filled / inputs.length) * 100}%`;
-    });
-
-    // Form Submission
-    async function submitForm(event) {
-        event.preventDefault();
-
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        loadingOverlay.style.display = 'flex';
-
-        const formData = new FormData(form);
-        const data = {};
-        formData.forEach((value, key) => {
-            if (key === 'challenges' || key === 'priceInfo') {
-                if (!data[key]) data[key] = [];
-                data[key].push(value);
-            } else {
-                data[key] = value;
-            }
-        });
-
-        // Save selected language to localStorage
-        const selectedLanguage = document.getElementById('language').value;
-        localStorage.setItem('selectedLanguage', selectedLanguage);
-
-        const now = new Date();
-        const istOptionsSheets = {
-            timeZone: 'Asia/Kolkata',
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: false
-        };
-        const formatterSheets = new Intl.DateTimeFormat('en-IN', istOptionsSheets);
-        const [
-            { value: day },,
-            { value: month },,
-            { value: year },,
-            { value: hour },,
             { value: minute },,
             { value: second }
         ] = formatterSheets.formatToParts(now);
@@ -1038,6 +968,7 @@
         data.submissionTime = submissionTimeSheets;
         document.getElementById('submissionTime').value = submissionTimeSheets;
 
+        // Get IST timestamp for display (Friday, March 14, 2025 at 12:59:57 AM)
         const istOptionsDisplay = {
             timeZone: 'Asia/Kolkata',
             weekday: 'long',
@@ -1050,13 +981,16 @@
         };
         const submissionTimeDisplay = now.toLocaleString('en-US', istOptionsDisplay);
 
+        // Get farmer's name
         const farmerName = document.getElementById('name').value;
 
+        // Transition to Thank You page
         document.getElementById('mainForm').style.display = 'none';
         const thankYouPage = document.getElementById('thankYouPage');
         thankYouPage.style.display = 'block';
         document.getElementById('thankYouMessage').textContent = `Thank You, ${farmerName}!`;
 
+        // Add submission time to Thank You page
         const submissionTimeElement = document.createElement('p');
         submissionTimeElement.innerHTML = `Form Submitted: <strong>${submissionTimeDisplay}</strong>`;
         submissionTimeElement.style.margin = '20px 0';
@@ -1064,15 +998,18 @@
 
         loadingOverlay.style.display = 'none';
 
+        // WhatsApp eligibility
         const state = document.getElementById('state') ? document.getElementById('state').value : localStorage.getItem('submittedState');
         if (['Karnataka', 'Andhra Pradesh', 'Tamil Nadu'].includes(state)) {
             document.getElementById('whatsappJoinSection').style.display = 'block';
         }
 
+        // LocalStorage
         localStorage.setItem('formSubmitted', 'true');
         localStorage.setItem('farmerName', farmerName);
         localStorage.setItem('submittedState', state);
 
+        // Send to Google Sheets
         try {
             await fetch('https://script.google.com/macros/s/AKfycbyUnX92mixXZdDlEs2ur9Diynd2qIgs7cmesj9rhMrYfCohXC3vP6aUaWjhFy-Wf4TE/exec', {
                 method: 'POST',
@@ -1087,50 +1024,52 @@
         }
     }
 
-    // Share Functionality with Language Parameter
-    function shareForm(platform) {
-        const baseUrl = "https://kissan-qa.onrender.com/#";
-        const farmerName = localStorage.getItem('farmerName') || document.getElementById('name')?.value || "A Farmer";
-        const selectedLanguage = document.getElementById('language').value || localStorage.getItem('selectedLanguage') || 'English';
-        localStorage.setItem('selectedLanguage', selectedLanguage);
+    // Share Functionality (unchanged)
+function shareForm(platform) {
+    const url = "https://kissan-qa.onrender.com/#"; // Your specific URL
+    const farmerName = localStorage.getItem('farmerName') || document.getElementById('name')?.value || "A Farmer"; // Fallback to "A Farmer" if no name
+    const selectedLanguage = document.getElementById('language').value || localStorage.getItem('selectedLanguage') || 'English'; // Get selected language, fallback to English
 
-        const shareTexts = {
-            'Kannada': `${farmerName} ನಿಮ್ಮೊಂದಿಗೆ ಮಾಹಿತಿ ಹಂಚಿಕೊಂಡು ಉಚಿತ ಮಣ್ಣು ಪರೀಕ್ಷಾ ಕಿಟ್ ಮತ್ತು ಕೃಷಿಗಾಗಿ AI ನಲ್ಲಿ 10% ವರೆಗೆ ರಿಯಾಯಿತಿ ಪಡೆದರು, ಈಗ ಫಾರ್ಮ್ ಅನ್ನು ಭರ್ತಿ ಮಾಡಿ ಮತ್ತು ಉಚಿತ ಮಣ್ಣು ಪರೀಕ್ಷಾ ಕಿಟ್‌ಗಳನ್ನು ಪಡೆಯಲು ಇತರರೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳುವ ಸರದಿ ನಿಮ್ಮದಾಗಿದೆ`,
-            'Telugu': `${farmerName} మీతో పంచుకుని ఉచిత మట్టి పరీక్షా కిట్ మరియు AI ఫార్ ఫార్మర్ పై 10% వరకు డిస్కౌంట్ పొందారు, ఇప్పుడు మీ వంతు ఫారమ్ నింపి ఇతరులతో పంచుకోవడం ద్వారా ఉచిత మట్టి పరీక్షా కిట్‌లను పొందండి`,
-            'English': `${farmerName} shared with you and got a FREE SOIL TEST KIT and up to 10% discount on AI for Farmer. Now it's your turn to fill the form and share with others to get Free Soil Test Kits`
-        };
+    // Store the selected language in localStorage for persistence
+    localStorage.setItem('selectedLanguage', selectedLanguage);
 
-        let langParam;
-        if (selectedLanguage === 'Kannada') {
-            langParam = 'kn';
-        } else if (selectedLanguage === 'Telugu') {
-            langParam = 'te';
-        } else {
-            langParam = 'en';
-        }
+    // Define share texts for each supported language
+    const shareTexts = {
+        'Kannada': `ಕನ್ನಡ: ${farmerName} ನಿಮ್ಮೊಂದಿಗೆ ಮಾಹಿತಿ ಹಂಚಿಕೊಂಡು ಉಚಿತ ಮಣ್ಣು ಪರೀಕ್ಷಾ ಕಿಟ್ ಮತ್ತು ಕೃಷಿಗಾಗಿ AI ನಲ್ಲಿ 10% ವರೆಗೆ ರಿಯಾಯಿತಿ ಪಡೆದರು, ಈಗ ಫಾರ್ಮ್ ಅನ್ನು ಭರ್ತಿ ಮಾಡಿ ಮತ್ತು ಉಚಿತ ಮಣ್ಣು ಪರೀಕ್ಷಾ ಕಿಟ್‌ಗಳನ್ನು ಪಡೆಯಲು ಇತರರೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳುವ ಸರದಿ ನಿಮ್ಮದಾಗಿದೆ: ${url}`,
+        'Telugu': `తెలుగు: ${farmerName} మీతో పంచుకుని ఉచిత మట్టి పరీక్షా కిట్ మరియు AI ఫార్ ఫార్మర్ పై 10% వరకు డిస్కౌంట్ పొందారు, ఇప్పుడు మీ వంతు ఫారమ్ నింపి ఇతరులతో పంచుకోవడం ద్వారా ఉచిత మట్టి పరీక్షా కిట్‌లను పొందండి: ${url}`,
+        'English': `English: ${farmerName} shared with you and got a FREE SOIL TEST KIT and up to 10% discount on AI for Farmer. Now it's your turn to fill the form and share with others to get Free Soil Test Kits: ${url}`
+    };
 
-        const urlWithLang = `${baseUrl}?lang=${langParam}`;
-        const shareText = `${shareTexts[selectedLanguage] || shareTexts['English']}: ${urlWithLang}`;
-
-        let shareUrl;
-        switch (platform) {
-            case 'whatsapp':
-                shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
-                break;
-            case 'facebook':
-                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(urlWithLang)}&quote=${encodeURIComponent(shareText)}`;
-                break;
-            case 'twitter':
-                shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
-                break;
-        }
-
-        if (shareUrl) {
-            window.open(shareUrl, '_blank');
-        }
+    // Determine the share text based on the selected language
+    let shareText;
+    if (selectedLanguage === 'Kannada') {
+        shareText = shareTexts['Kannada'];
+    } else if (selectedLanguage === 'Telugu') {
+        shareText = shareTexts['Telugu'];
+    } else {
+        shareText = shareTexts['English']; // Default to English for all other languages
     }
 
-    // WhatsApp Eligibility
+    // Construct the share URL based on the platform
+    let shareUrl;
+    switch (platform) {
+        case 'whatsapp':
+            shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+            break;
+        case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(shareText)}`;
+            break;
+        case 'twitter':
+            shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`; // Note: Corrected to Twitter, as Instagram doesn't have a direct share API
+            break;
+    }
+
+    if (shareUrl) {
+        window.open(shareUrl, '_blank');
+    }
+}
+
+    // WhatsApp Eligibility (unchanged)
     function checkWhatsAppEligibility() {
         const state = document.getElementById('state').value;
         const whatsappOption = document.getElementById('whatsappGroupOption');
@@ -1153,26 +1092,7 @@
             alert('Please provide your phone number to join the WhatsApp group.');
         }
     }
-
-    // Function to set language from URL parameter
-    function setLanguageFromUrl() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const lang = urlParams.get('lang');
-        if (lang) {
-            // Wait for Google Translate to initialize
-            const checkTranslate = setInterval(() => {
-                if (typeof google !== 'undefined' && google.translate) {
-                    const translateSelect = document.querySelector('.goog-te-combo');
-                    if (translateSelect) {
-                        translateSelect.value = lang;
-                        translateSelect.dispatchEvent(new Event('change'));
-                        clearInterval(checkTranslate);
-                    }
-                }
-            }, 500);
-        }
-    }
-</script>
+    </script>
 
  <!-- Google Translate Widget -->
  <div id="google_translate_element"></div>
