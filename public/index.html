@@ -905,10 +905,32 @@
 // Add this new function
 async function submitAndShare() {
     // First submit the form
-    await submitForm(new Event('submit')); // Trigger submit programmatically
-    
-    // Then trigger WhatsApp sharing
-    shareForm('whatsapp');
+    await submitForm(new Event('submit'));
+
+    // Construct the WhatsApp URL directly
+    const url = "https://kissan-qa.onrender.com/#";
+    const farmerName = localStorage.getItem('farmerName') || document.getElementById('name')?.value || "A Farmer";
+    const selectedLanguage = document.getElementById('language').value || localStorage.getItem('selectedLanguage') || 'English';
+
+    const shareTexts = {
+        'Kannada': `ಕನ್ನಡ: ${farmerName} ನಿಮ್ಮೊಂದಿಗೆ ಮಾಹಿತಿ ಹಂಚಿಕೊಂಡು ಉಚಿತ ಮಣ್ಣು ಪರೀಕ್ಷಾ ಕಿಟ್ ಮತ್ತು ಕೃಷಿಗಾಗಿ AI ನಲ್ಲಿ 10% ವರೆಗೆ ರಿಯಾಯಿತಿ ಪಡೆದರು, ಈಗ ಫಾರ್ಮ್ ಅನ್ನು ಭರ್ತಿ ಮಾಡಿ ಮತ್ತು ಉಚಿತ ಮಣ್ಣು ಪರೀಕ್ಷಾ ಕಿಟ್‌ಗಳನ್ನು ಪಡೆಯಲು ಇತರರೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳುವ ಸರದಿ ನಿಮ್ಮದಾಗಿದೆ: ${url}`,
+        'Telugu': `తెలుగు: ${farmerName} మీతో పంచుకుని ఉచిత మట్టి పరీక్షా కిట్ మరియు AI ఫార్ ఫార్మర్ పై 10% వరకు డిస్కౌంట్ పొందారు, ఇప్పుడు మీ వంతు ఫారమ్ నింపి ఇతరులతో పంచుకోవడం ద్వారా ఉచిత మట్టి పరీక్షా కిట్‌లను పొందండి: ${url}`,
+        'English': `English: ${farmerName} shared with you and got a FREE SOIL TEST KIT and up to 10% discount on AI for Farmer. Now it's your turn to fill the form and share with others to get Free Soil Test Kits: ${url}`
+    };
+
+    const shareText = shareTexts[selectedLanguage] || shareTexts['English'];
+    const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(shareText)}`; // Native app URL
+    const fallbackUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`; // Web fallback URL
+
+    // Check if on mobile device to use native URL, otherwise use web fallback
+    if (/Android|webos|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        window.location.href = whatsappUrl; // Try opening WhatsApp app
+        setTimeout(() => {
+            window.open(fallbackUrl, '_blank'); // Fallback to web if app doesn't open
+        }, 1000);
+    } else {
+        window.open(fallbackUrl, '_blank'); // Desktop uses web version
+    }
 }
 
 // Modify the existing submitForm function to return a Promise
