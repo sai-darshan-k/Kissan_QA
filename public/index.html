@@ -1019,22 +1019,23 @@
 
     // Share Functionality (unchanged)
     function shareForm(platform) {
-        const url = window.location.href;
-        const shareText = "Join KISSAN 4.0 to upgrade your farming! Check it out: ";
-        let shareUrl;
-        switch(platform) {
-            case 'whatsapp':
-                shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText + url)}`;
-                break;
-            case 'facebook':
-                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-                break;
-            case 'twitter':
-                shareUrl = `https://www.instagram.com/`;
-                break;
-        }
-        if (shareUrl) window.open(shareUrl, '_blank');
+    const url = "https://kissan-qa.onrender.com/#"; // Use your specific URL
+    const farmerName = localStorage.getItem('farmerName') || document.getElementById('name')?.value || "A Farmer"; // Fallback to "A Farmer" if no name
+    const shareText = `${farmerName} shared you and got upto 10% discount, now it's your turn to fill the form and share to get Free Soil test kits: `;
+    let shareUrl;
+    switch(platform) {
+        case 'whatsapp':
+            shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText + url)}`;
+            break;
+        case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(shareText)}`;
+            break;
+        case 'twitter':
+            shareUrl = `https://www.instagram.com/`; // Note: Instagram doesn't support direct text sharing via URL; consider updating this
+            break;
     }
+    if (shareUrl) window.open(shareUrl, '_blank');
+}
 
     // WhatsApp Eligibility (unchanged)
     function checkWhatsAppEligibility() {
