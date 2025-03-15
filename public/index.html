@@ -913,9 +913,9 @@ async function submitAndShare() {
     const selectedLanguage = document.getElementById('language').value || localStorage.getItem('selectedLanguage') || 'English';
 
     const shareTexts = {
-        'Kannada': `ಕನ್ನಡ: ${farmerName} ನಿಮ್ಮೊಂದಿಗೆ ಮಾಹಿತಿ ಹಂಚಿಕೊಂಡು ಉಚಿತ ಮಣ್ಣು ಪರೀಕ್ಷಾ ಕಿಟ್ ಮತ್ತು ಕೃಷಿಗಾಗಿ AI ನಲ್ಲಿ 10% ವರೆಗೆ ರಿಯಾಯಿತಿ ಪಡೆದರು, ಈಗ ಫಾರ್ಮ್ ಅನ್ನು ಭರ್ತಿ ಮಾಡಿ ಮತ್ತು ಉಚಿತ ಮಣ್ಣು ಪರೀಕ್ಷಾ ಕಿಟ್‌ಗಳನ್ನು ಪಡೆಯಲು ಇತರರೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳುವ ಸರದಿ ನಿಮ್ಮದಾಗಿದೆ: ${url}`,
-        'Telugu': `తెలుగు: ${farmerName} మీతో పంచుకుని ఉచిత మట్టి పరీక్షా కిట్ మరియు AI ఫార్ ఫార్మర్ పై 10% వరకు డిస్కౌంట్ పొందారు, ఇప్పుడు మీ వంతు ఫారమ్ నింపి ఇతరులతో పంచుకోవడం ద్వారా ఉచిత మట్టి పరీక్షా కిట్‌లను పొందండి: ${url}`,
-        'English': `English: ${farmerName} shared with you and got a FREE SOIL TEST KIT and up to 10% discount on AI for Farmer. Now it's your turn to fill the form and share with others to get Free Soil Test Kits: ${url}`
+        'Kannada': `${farmerName} ನಿಮ್ಮೊಂದಿಗೆ ಮಾಹಿತಿ ಹಂಚಿಕೊಂಡು ಉಚಿತ ಮಣ್ಣು ಪರೀಕ್ಷಾ ಕಿಟ್ ಮತ್ತು ಕೃಷಿಗಾಗಿ AI ನಲ್ಲಿ 10% ವರೆಗೆ ರಿಯಾಯಿತಿ ಪಡೆದರು, ಈಗ ಫಾರ್ಮ್ ಅನ್ನು ಭರ್ತಿ ಮಾಡಿ ಮತ್ತು ಉಚಿತ ಮಣ್ಣು ಪರೀಕ್ಷಾ ಕಿಟ್‌ಗಳನ್ನು ಪಡೆಯಲು ಇತರರೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳುವ ಸರದಿ ನಿಮ್ಮದಾಗಿದೆ: ${url}`,
+        'Telugu': `${farmerName} మీతో ఫారమ్ పంచుకొని ఉచిత మట్టి పరీక్షా కిట్ మరియు AI ఫార్ ఫార్మర్ పై 10% వరకు డిస్కౌంట్ పొందారు, ఇప్పుడు మీ వంతు, ఇపుడే ఫారమ్ నింపి ఇతరులతో పంచుకోవడం ద్వారా ఉచిత మట్టి పరీక్షా కిట్‌లను పొందండి: ${url}`,
+        'English': `${farmerName} shared with you and got a FREE SOIL TEST KIT and up to 10% discount on AI for Farmer. Now it's your turn to fill the form and share with others to get Free Soil Test Kits: ${url}`
     };
 
     const shareText = shareTexts[selectedLanguage] || shareTexts['English'];
