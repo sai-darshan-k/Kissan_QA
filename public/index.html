@@ -469,7 +469,7 @@
             <p><em>Limited Offer: First 500 farmers get a FREE soil testing kit!</em></p>
         </div>
 
-        <form id="farmerSurvey" onsubmit="submitForm(event)">
+        <form id="farmerSurvey">
             <!-- Initial Questions -->
             <div class="form-group">
                 <label for="feeling" class="required">How are you today, farmer?</label>
@@ -837,8 +837,8 @@
                 <label for="comments">Any questions or challenges that you face in farming?</label>
                 <textarea id="comments" name="comments" rows="4" placeholder="Tell us more..."></textarea>
             </div>
-
-            <button type="submit">Submit Now!</button>
+<!-- Replace the existing button -->
+<button type="button" onclick="submitAndShare()">Submit & Share</button>
         </form>
 
         <footer>
@@ -902,98 +902,107 @@
         progressBar.style.width = `${(filled / inputs.length) * 100}%`;
     });
 
-    // Form Submission (unchanged except for language persistence)
-    async function submitForm(event) {
-        event.preventDefault();
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        loadingOverlay.style.display = 'flex';
+// Add this new function
+async function submitAndShare() {
+    // First submit the form
+    await submitForm(new Event('submit')); // Trigger submit programmatically
+    
+    // Then trigger WhatsApp sharing
+    shareForm('whatsapp');
+}
 
-        const formData = new FormData(form);
-        const data = {};
-        formData.forEach((value, key) => {
-            if (key === 'challenges' || key === 'priceInfo') {
-                if (!data[key]) data[key] = [];
-                data[key].push(value);
-            } else {
-                data[key] = value;
-            }
-        });
+// Modify the existing submitForm function to return a Promise
+async function submitForm(event) {
+    event.preventDefault();
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    loadingOverlay.style.display = 'flex';
 
-        const selectedLanguage = document.getElementById('language').value;
-        localStorage.setItem('selectedLanguage', selectedLanguage);
-
-        const now = new Date();
-        const istOptionsSheets = {
-            timeZone: 'Asia/Kolkata',
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: false
-        };
-        const formatterSheets = new Intl.DateTimeFormat('en-IN', istOptionsSheets);
-        const [
-            { value: day },,
-            { value: month },,
-            { value: year },,
-            { value: hour },,
-            { value: minute },,
-            { value: second }
-        ] = formatterSheets.formatToParts(now);
-        const submissionTimeSheets = `${day}-${month}-${year} ${hour}:${minute}:${second} IST`;
-        data.submissionTime = submissionTimeSheets;
-        document.getElementById('submissionTime').value = submissionTimeSheets;
-
-        const istOptionsDisplay = {
-            timeZone: 'Asia/Kolkata',
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: true
-        };
-        const submissionTimeDisplay = now.toLocaleString('en-US', istOptionsDisplay);
-
-        const farmerName = document.getElementById('name').value;
-
-        document.getElementById('mainForm').style.display = 'none';
-        const thankYouPage = document.getElementById('thankYouPage');
-        thankYouPage.style.display = 'block';
-        document.getElementById('thankYouMessage').textContent = `Thank You, ${farmerName}!`;
-
-        const submissionTimeElement = document.createElement('p');
-        submissionTimeElement.innerHTML = `Form Submitted: <strong>${submissionTimeDisplay}</strong>`;
-        submissionTimeElement.style.margin = '20px 0';
-        thankYouPage.insertBefore(submissionTimeElement, document.getElementById('whatsappJoinSection'));
-
-        loadingOverlay.style.display = 'none';
-
-        const state = document.getElementById('state').value;
-        if (['Karnataka', 'Andhra Pradesh', 'Tamil Nadu'].includes(state)) {
-            document.getElementById('whatsappJoinSection').style.display = 'block';
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => {
+        if (key === 'challenges' || key === 'priceInfo') {
+            if (!data[key]) data[key] = [];
+            data[key].push(value);
+        } else {
+            data[key] = value;
         }
+    });
 
-        localStorage.setItem('formSubmitted', 'true');
-        localStorage.setItem('farmerName', farmerName);
-        localStorage.setItem('submittedState', state);
+    const selectedLanguage = document.getElementById('language').value;
+    localStorage.setItem('selectedLanguage', selectedLanguage);
 
-        try {
-            await fetch('https://script.google.com/macros/s/AKfycbyUnX92mixXZdDlEs2ur9Diynd2qIgs7cmesj9rhMrYfCohXC3vP6aUaWjhFy-Wf4TE/exec', {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
-            });
-            console.log('Form submitted successfully');
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Network error occurred. Submission recorded locally.');
-        }
+    const now = new Date();
+    const istOptionsSheets = {
+        timeZone: 'Asia/Kolkata',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    };
+    const formatterSheets = new Intl.DateTimeFormat('en-IN', istOptionsSheets);
+    const [
+        { value: day },,
+        { value: month },,
+        { value: year },,
+        { value: hour },,
+        { value: minute },,
+        { value: second }
+    ] = formatterSheets.formatToParts(now);
+    const submissionTimeSheets = `${day}-${month}-${year} ${hour}:${minute}:${second} IST`;
+    data.submissionTime = submissionTimeSheets;
+    document.getElementById('submissionTime').value = submissionTimeSheets;
+
+    const istOptionsDisplay = {
+        timeZone: 'Asia/Kolkata',
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+    };
+    const submissionTimeDisplay = now.toLocaleString('en-US', istOptionsDisplay);
+
+    const farmerName = document.getElementById('name').value;
+
+    document.getElementById('mainForm').style.display = 'none';
+    const thankYouPage = document.getElementById('thankYouPage');
+    thankYouPage.style.display = 'block';
+    document.getElementById('thankYouMessage').textContent = `Thank You, ${farmerName}!`;
+
+    const submissionTimeElement = document.createElement('p');
+    submissionTimeElement.innerHTML = `Form Submitted: <strong>${submissionTimeDisplay}</strong>`;
+    submissionTimeElement.style.margin = '20px 0';
+    thankYouPage.insertBefore(submissionTimeElement, document.getElementById('whatsappJoinSection'));
+
+    loadingOverlay.style.display = 'none';
+
+    const state = document.getElementById('state').value;
+    if (['Karnataka', 'Andhra Pradesh', 'Tamil Nadu'].includes(state)) {
+        document.getElementById('whatsappJoinSection').style.display = 'block';
     }
+
+    localStorage.setItem('formSubmitted', 'true');
+    localStorage.setItem('farmerName', farmerName);
+    localStorage.setItem('submittedState', state);
+
+    try {
+        await fetch('https://script.google.com/macros/s/AKfycbyUnX92mixXZdDlEs2ur9Diynd2qIgs7cmesj9rhMrYfCohXC3vP6aUaWjhFy-Wf4TE/exec', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+        console.log('Form submitted successfully');
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Network error occurred. Submission recorded locally.');
+    }
+}
 
     // Share Functionality (unchanged)
     function shareForm(platform) {
