@@ -920,7 +920,7 @@ async function submitAndShare() {
 
     const shareText = shareTexts[selectedLanguage] || shareTexts['English'];
     const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(shareText)}`; // Native app URL
-    const fallbackUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`; // Web fallback URL
+    
 
     // Check if on mobile device to use native URL, otherwise use web fallback
     if (/Android|webos|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
