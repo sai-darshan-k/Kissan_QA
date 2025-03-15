@@ -921,22 +921,29 @@
 
     // Form Submission with IST display
     async function submitForm(event) {
-        event.preventDefault();
+    event.preventDefault();
 
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        loadingOverlay.style.display = 'flex';
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    loadingOverlay.style.display = 'flex';
 
-        const formData = new FormData(form);
-        const data = {};
-        formData.forEach((value, key) => {
-            if (key === 'challenges' || key === 'priceInfo') {
-                if (!data[key]) data[key] = [];
-                data[key].push(value);
-            } else {
-                data[key] = value;
-            }
-        });
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => {
+        if (key === 'challenges' || key === 'priceInfo') {
+            if (!data[key]) data[key] = [];
+            data[key].push(value);
+        } else {
+            data[key] = value;
+        }
+    });
 
+    // Save selected language to localStorage
+    const selectedLanguage = document.getElementById('language').value;
+    localStorage.setItem('selectedLanguage', selectedLanguage);
+
+    // Rest of your existing submitForm code...
+    // (IST timestamp, farmer name, page transition, etc.)
+}
         // Get IST timestamp for Google Sheets (DD-MM-YYYY HH:MM:SS IST)
         const now = new Date();
         const istOptionsSheets = {
@@ -1019,21 +1026,34 @@
     }
 
     // Share Functionality (unchanged)
-    function shareForm(platform) {
-    const url = "https://kissan-qa.onrender.com/#"; // Use your specific URL
+function shareForm(platform) {
+    const url = "https://kissan-qa.onrender.com/#"; // Your specific URL
     const farmerName = localStorage.getItem('farmerName') || document.getElementById('name')?.value || "A Farmer"; // Fallback to "A Farmer" if no name
-    
-    // Combine all three languages in one message with clear separation
-    const shareText = `
-English: ${farmerName} shared you and got FREE SOIL TEST KIT and upto 10% discount on AI for Farmer, now it's your turn to fill the form and share others to get Free Soil test kits: ${url}
+    const selectedLanguage = document.getElementById('language').value || localStorage.getItem('selectedLanguage') || 'English'; // Get selected language, fallback to English
 
-Kannada: ${farmerName} ನಿಮ್ಮೊಂದಿಗೆ ಮಾಹಿತಿ ಹಂಚಿಕೊಂಡು ಉಚಿತ ಮಣ್ಣು ಪರೀಕ್ಷಾ ಕಿಟ್ ಮತ್ತು ಕೃಷಿಗಾಗಿ AI ನಲ್ಲಿ 10% ವರೆಗೆ ರಿಯಾಯಿತಿ ಪಡೆದರು, ಈಗ ಫಾರ್ಮ್ ಅನ್ನು ಭರ್ತಿ ಮಾಡಿ ಮತ್ತು ಉಚಿತ ಮಣ್ಣು ಪರೀಕ್ಷಾ ಕಿಟ್‌ಗಳನ್ನು ಪಡೆಯಲು ಇತರರೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳುವ ಸರದಿ ನಿಮ್ಮದಾಗಿದೆ.: ${url}
+    // Store the selected language in localStorage for persistence
+    localStorage.setItem('selectedLanguage', selectedLanguage);
 
-Telugu: ${farmerName} మీతో పంచుకుని ఉచిత మట్టి పరీక్షా కిట్ మరియు AI ఫార్ ఫార్మర్ పై 10% వరకు డిస్కౌంట్ పొందారు, ఇప్పుడు మీ వంతు ఫారమ్ నింపి ఇతరులతో పంచుకోవడం ద్వారా ఉచిత మట్టి పరీక్షా కిట్‌లను పొందండి: ${url}
-    `;
+    // Define share texts for each supported language
+    const shareTexts = {
+        'Kannada': `ಕನ್ನಡ: ${farmerName} ನಿಮ್ಮೊಂದಿಗೆ ಮಾಹಿತಿ ಹಂಚಿಕೊಂಡು ಉಚಿತ ಮಣ್ಣು ಪರೀಕ್ಷಾ ಕಿಟ್ ಮತ್ತು ಕೃಷಿಗಾಗಿ AI ನಲ್ಲಿ 10% ವರೆಗೆ ರಿಯಾಯಿತಿ ಪಡೆದರು, ಈಗ ಫಾರ್ಮ್ ಅನ್ನು ಭರ್ತಿ ಮಾಡಿ ಮತ್ತು ಉಚಿತ ಮಣ್ಣು ಪರೀಕ್ಷಾ ಕಿಟ್‌ಗಳನ್ನು ಪಡೆಯಲು ಇತರರೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳುವ ಸರದಿ ನಿಮ್ಮದಾಗಿದೆ: ${url}`,
+        'Telugu': `తెలుగు: ${farmerName} మీతో పంచుకుని ఉచిత మట్టి పరీక్షా కిట్ మరియు AI ఫార్ ఫార్మర్ పై 10% వరకు డిస్కౌంట్ పొందారు, ఇప్పుడు మీ వంతు ఫారమ్ నింపి ఇతరులతో పంచుకోవడం ద్వారా ఉచిత మట్టి పరీక్షా కిట్‌లను పొందండి: ${url}`,
+        'English': `English: ${farmerName} shared with you and got a FREE SOIL TEST KIT and up to 10% discount on AI for Farmer. Now it's your turn to fill the form and share with others to get Free Soil Test Kits: ${url}`
+    };
 
+    // Determine the share text based on the selected language
+    let shareText;
+    if (selectedLanguage === 'Kannada') {
+        shareText = shareTexts['Kannada'];
+    } else if (selectedLanguage === 'Telugu') {
+        shareText = shareTexts['Telugu'];
+    } else {
+        shareText = shareTexts['English']; // Default to English for all other languages
+    }
+
+    // Construct the share URL based on the platform
     let shareUrl;
-    switch(platform) {
+    switch (platform) {
         case 'whatsapp':
             shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
             break;
@@ -1041,11 +1061,14 @@ Telugu: ${farmerName} మీతో పంచుకుని ఉచిత మట�
             shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(shareText)}`;
             break;
         case 'twitter':
-            shareUrl = `https://www.instagram.in/t?text=${encodeURIComponent(shareText)}`;
+            shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`; // Note: Corrected to Twitter, as Instagram doesn't have a direct share API
             break;
     }
-    if (shareUrl) window.open(shareUrl, '_blank');
-        }
+
+    if (shareUrl) {
+        window.open(shareUrl, '_blank');
+    }
+}
 
     // WhatsApp Eligibility (unchanged)
     function checkWhatsAppEligibility() {
